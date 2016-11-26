@@ -161,6 +161,9 @@ class MovieSearcher(SearcherBase, MovieTypeBase):
         ret = False
 
         for index, q_identifier in enumerate(profile.get('qualities', [])):
+            if q_identifier == '':
+                continue # Ignore qualities that are undefined
+            
             quality_custom = {
                 'index': index,
                 'quality': q_identifier,
@@ -452,7 +455,7 @@ config = [{
                     'advanced': True,
                     'default': '*',
                     'type': 'string',
-                    'description': '<strong>*</strong>: Every day, <strong>*/2</strong>: Every 2 days, <strong>1</strong>: Every first of the month. See <a href="http://packages.python.org/APScheduler/cronschedule.html">APScheduler</a> for details.',
+                    'description': '<strong>*</strong>: Every day, <strong>*/2</strong>: Every 2 days, <strong>1</strong>: Every first of the month. See <a href="https://apscheduler.readthedocs.org/en/latest/modules/triggers/cron.html" target="_blank">APScheduler</a> for details.',
                 },
                 {
                     'name': 'cron_hour',
